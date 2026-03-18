@@ -1,0 +1,222 @@
+[
+    {
+        "label": "pandas",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pandas",
+        "description": "pandas",
+        "detail": "pandas",
+        "documentation": {}
+    },
+    {
+        "label": "numpy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "numpy",
+        "description": "numpy",
+        "detail": "numpy",
+        "documentation": {}
+    },
+    {
+        "label": "matplotlib.pyplot",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "matplotlib.pyplot",
+        "description": "matplotlib.pyplot",
+        "detail": "matplotlib.pyplot",
+        "documentation": {}
+    },
+    {
+        "label": "train_test_split",
+        "importPath": "sklearn.model_selection",
+        "description": "sklearn.model_selection",
+        "isExtraImport": true,
+        "detail": "sklearn.model_selection",
+        "documentation": {}
+    },
+    {
+        "label": "r2_score",
+        "importPath": "sklearn.metrics",
+        "description": "sklearn.metrics",
+        "isExtraImport": true,
+        "detail": "sklearn.metrics",
+        "documentation": {}
+    },
+    {
+        "label": "root_mean_squared_error",
+        "importPath": "sklearn.metrics",
+        "description": "sklearn.metrics",
+        "isExtraImport": true,
+        "detail": "sklearn.metrics",
+        "documentation": {}
+    },
+    {
+        "label": "StandardScaler",
+        "importPath": "sklearn.preprocessing",
+        "description": "sklearn.preprocessing",
+        "isExtraImport": true,
+        "detail": "sklearn.preprocessing",
+        "documentation": {}
+    },
+    {
+        "label": "Ridge",
+        "importPath": "sklearn.linear_model",
+        "description": "sklearn.linear_model",
+        "isExtraImport": true,
+        "detail": "sklearn.linear_model",
+        "documentation": {}
+    },
+    {
+        "label": "df",
+        "kind": 5,
+        "importPath": "early-v1",
+        "description": "early-v1",
+        "peekOfCode": "df = pd.read_csv(\"dataset.csv\")\n# Basic inspection\nprint(df[\"algorithmic_amplification_index\"].describe())\n# Plot distribution\n# plt.hist(df[\"algorithmic_amplification_index\"], bins=50)\n# plt.title(\"Distribution of Algorithmic Amplification Index\")\n# plt.xlabel(\"Algorithmic Amplification Index\")\n# plt.ylabel(\"Frequency\")\n# plt.show()\nearly_features = [",
+        "detail": "early-v1",
+        "documentation": {}
+    },
+    {
+        "label": "early_features",
+        "kind": 5,
+        "importPath": "early-v1",
+        "description": "early-v1",
+        "peekOfCode": "early_features = [\n    \"early_likes\",\n    \"early_comments\",\n    \"early_shares\",\n    \"early_total_engagement\",\n    \"early_engagement_velocity\",\n    \"early_comment_share_ratio\"\n]\nprint(df[early_features].corrwith(df[\"algorithmic_amplification_index\"]))\n# Select features components",
+        "detail": "early-v1",
+        "documentation": {}
+    },
+    {
+        "label": "features",
+        "kind": 5,
+        "importPath": "early-v1",
+        "description": "early-v1",
+        "peekOfCode": "features = [\n    \"early_likes\",\n    \"early_comments\",\n    \"early_shares\",\n    \"follower_count\",\n    \"authority_log\",\n    \"verified\",\n    \"account_age_years\"\n]\n## Features for Velocity Model",
+        "detail": "early-v1",
+        "documentation": {}
+    },
+    {
+        "label": "X",
+        "kind": 5,
+        "importPath": "early-v1",
+        "description": "early-v1",
+        "peekOfCode": "X = df[features]\ny = df[\"algorithmic_amplification_index\"]\n# Train-test split\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.2, random_state=42\n)\n##### MODEL BLOCK #####\n# Train model\n# Scale features\nscaler = StandardScaler()",
+        "detail": "early-v1",
+        "documentation": {}
+    },
+    {
+        "label": "y",
+        "kind": 5,
+        "importPath": "early-v1",
+        "description": "early-v1",
+        "peekOfCode": "y = df[\"algorithmic_amplification_index\"]\n# Train-test split\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.2, random_state=42\n)\n##### MODEL BLOCK #####\n# Train model\n# Scale features\nscaler = StandardScaler()\nX_train_scaled = scaler.fit_transform(X_train)",
+        "detail": "early-v1",
+        "documentation": {}
+    },
+    {
+        "label": "scaler",
+        "kind": 5,
+        "importPath": "early-v1",
+        "description": "early-v1",
+        "peekOfCode": "scaler = StandardScaler()\nX_train_scaled = scaler.fit_transform(X_train)\nX_test_scaled = scaler.transform(X_test)\n# Ridge regression\nridge_model = Ridge(alpha=1.0)\nridge_model.fit(X_train_scaled, y_train)\n# Predictions\ny_pred_ridge = ridge_model.predict(X_test_scaled)\n# Evaluation\nprint(\"R² (Ridge):\", r2_score(y_test, y_pred_ridge))",
+        "detail": "early-v1",
+        "documentation": {}
+    },
+    {
+        "label": "X_train_scaled",
+        "kind": 5,
+        "importPath": "early-v1",
+        "description": "early-v1",
+        "peekOfCode": "X_train_scaled = scaler.fit_transform(X_train)\nX_test_scaled = scaler.transform(X_test)\n# Ridge regression\nridge_model = Ridge(alpha=1.0)\nridge_model.fit(X_train_scaled, y_train)\n# Predictions\ny_pred_ridge = ridge_model.predict(X_test_scaled)\n# Evaluation\nprint(\"R² (Ridge):\", r2_score(y_test, y_pred_ridge))\nprint(\"RMSE (Ridge):\", root_mean_squared_error(y_test, y_pred_ridge))",
+        "detail": "early-v1",
+        "documentation": {}
+    },
+    {
+        "label": "X_test_scaled",
+        "kind": 5,
+        "importPath": "early-v1",
+        "description": "early-v1",
+        "peekOfCode": "X_test_scaled = scaler.transform(X_test)\n# Ridge regression\nridge_model = Ridge(alpha=1.0)\nridge_model.fit(X_train_scaled, y_train)\n# Predictions\ny_pred_ridge = ridge_model.predict(X_test_scaled)\n# Evaluation\nprint(\"R² (Ridge):\", r2_score(y_test, y_pred_ridge))\nprint(\"RMSE (Ridge):\", root_mean_squared_error(y_test, y_pred_ridge))\n# Coefficients (standardized)",
+        "detail": "early-v1",
+        "documentation": {}
+    },
+    {
+        "label": "ridge_model",
+        "kind": 5,
+        "importPath": "early-v1",
+        "description": "early-v1",
+        "peekOfCode": "ridge_model = Ridge(alpha=1.0)\nridge_model.fit(X_train_scaled, y_train)\n# Predictions\ny_pred_ridge = ridge_model.predict(X_test_scaled)\n# Evaluation\nprint(\"R² (Ridge):\", r2_score(y_test, y_pred_ridge))\nprint(\"RMSE (Ridge):\", root_mean_squared_error(y_test, y_pred_ridge))\n# Coefficients (standardized)\nridge_coefficients = pd.DataFrame({\n    \"Feature\": features,",
+        "detail": "early-v1",
+        "documentation": {}
+    },
+    {
+        "label": "y_pred_ridge",
+        "kind": 5,
+        "importPath": "early-v1",
+        "description": "early-v1",
+        "peekOfCode": "y_pred_ridge = ridge_model.predict(X_test_scaled)\n# Evaluation\nprint(\"R² (Ridge):\", r2_score(y_test, y_pred_ridge))\nprint(\"RMSE (Ridge):\", root_mean_squared_error(y_test, y_pred_ridge))\n# Coefficients (standardized)\nridge_coefficients = pd.DataFrame({\n    \"Feature\": features,\n    \"Coefficient\": ridge_model.coef_\n})\nprint(\"\\nRidge Coefficients (Standardized):\")",
+        "detail": "early-v1",
+        "documentation": {}
+    },
+    {
+        "label": "ridge_coefficients",
+        "kind": 5,
+        "importPath": "early-v1",
+        "description": "early-v1",
+        "peekOfCode": "ridge_coefficients = pd.DataFrame({\n    \"Feature\": features,\n    \"Coefficient\": ridge_model.coef_\n})\nprint(\"\\nRidge Coefficients (Standardized):\")\nprint(ridge_coefficients.sort_values(by=\"Coefficient\", ascending=False))\nprint(X.corr())",
+        "detail": "early-v1",
+        "documentation": {}
+    },
+    {
+        "label": "df",
+        "kind": 5,
+        "importPath": "early_metrics_model_genesis",
+        "description": "early_metrics_model_genesis",
+        "peekOfCode": "df = pd.read_csv(\"dataset.csv\")\n# Check distribution of very_high_reach\nprint(df[\"very_high_reach\"].value_counts(normalize=True))\nprint(\"Counts:\")\nprint(df[\"very_high_reach\"].value_counts())\nprint(\"\\nPercentages:\")\nprint(df[\"very_high_reach\"].value_counts(normalize=True))",
+        "detail": "early_metrics_model_genesis",
+        "documentation": {}
+    },
+    {
+        "label": "df",
+        "kind": 5,
+        "importPath": "tiktok_data_visual",
+        "description": "tiktok_data_visual",
+        "peekOfCode": "df = pd.read_csv(\"dataset.csv\")\n# quick peek\n# print(df.head())\n# print(df.info())\n######## summary statistics ########\n# basic stats\nsummary = df.describe(include=\"all\")\nprint(summary)\n# missing values\nmissing = df.isnull().mean().sort_values(ascending=False)",
+        "detail": "tiktok_data_visual",
+        "documentation": {}
+    },
+    {
+        "label": "summary",
+        "kind": 5,
+        "importPath": "tiktok_data_visual",
+        "description": "tiktok_data_visual",
+        "peekOfCode": "summary = df.describe(include=\"all\")\nprint(summary)\n# missing values\nmissing = df.isnull().mean().sort_values(ascending=False)\nprint(missing)\n######## END summary statistics ########\n#### distribution plots #####\nnumeric_cols = [\n    \"follower_count\",\n    \"authority_log\",",
+        "detail": "tiktok_data_visual",
+        "documentation": {}
+    },
+    {
+        "label": "missing",
+        "kind": 5,
+        "importPath": "tiktok_data_visual",
+        "description": "tiktok_data_visual",
+        "peekOfCode": "missing = df.isnull().mean().sort_values(ascending=False)\nprint(missing)\n######## END summary statistics ########\n#### distribution plots #####\nnumeric_cols = [\n    \"follower_count\",\n    \"authority_log\",\n    \"early_total_engagement\",\n    \"reach\",\n    \"impressions\",",
+        "detail": "tiktok_data_visual",
+        "documentation": {}
+    },
+    {
+        "label": "numeric_cols",
+        "kind": 5,
+        "importPath": "tiktok_data_visual",
+        "description": "tiktok_data_visual",
+        "peekOfCode": "numeric_cols = [\n    \"follower_count\",\n    \"authority_log\",\n    \"early_total_engagement\",\n    \"reach\",\n    \"impressions\",\n    \"total_likes\",\n    \"total_comments\",\n    \"total_shares\",\n    \"link_clicks\",",
+        "detail": "tiktok_data_visual",
+        "documentation": {}
+    },
+    {
+        "label": "corr",
+        "kind": 5,
+        "importPath": "tiktok_data_visual",
+        "description": "tiktok_data_visual",
+        "peekOfCode": "corr = df.select_dtypes(include=np.number).corr()\nplt.figure(figsize=(12, 10))\nplt.imshow(corr)\nplt.colorbar()\nplt.title(\"Feature Correlation Matrix\")\nplt.xticks(range(len(corr.columns)), corr.columns, rotation=90)\nplt.yticks(range(len(corr.columns)), corr.columns)\nplt.show()\n#### END correlation heatmap ###",
+        "detail": "tiktok_data_visual",
+        "documentation": {}
+    }
+]

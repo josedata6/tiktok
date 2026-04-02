@@ -9,6 +9,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score, root_mean_squared_error
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import Ridge
+from sklearn.ensemble import GradientBoostingRegressor
 
 # Load dataset
 df = pd.read_csv("dataset.csv")

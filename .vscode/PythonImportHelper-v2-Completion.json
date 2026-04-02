@@ -67,6 +67,14 @@
         "documentation": {}
     },
     {
+        "label": "GradientBoostingRegressor",
+        "importPath": "sklearn.ensemble",
+        "description": "sklearn.ensemble",
+        "isExtraImport": true,
+        "detail": "sklearn.ensemble",
+        "documentation": {}
+    },
+    {
         "label": "df",
         "kind": 5,
         "importPath": "early-v1",

@@ -92,3 +92,37 @@ print("\nRidge Coefficients (Standardized):")
 print(ridge_coefficients.sort_values(by="Coefficient", ascending=False))
 
 print(X.corr())
+
+##### GRADIENT BOOSTING MODEL #####
+
+# IMPORTANT: Do NOT scale features for tree-based models
+X_train_gb = X_train
+X_test_gb = X_test
+
+# Initialize model
+gb_model = GradientBoostingRegressor(
+    n_estimators=200,
+    learning_rate=0.05,
+    max_depth=3,
+    random_state=42
+)
+
+# Train model
+gb_model.fit(X_train_gb, y_train)
+
+# Predictions
+y_pred_gb = gb_model.predict(X_test_gb)
+
+# Evaluation
+print("\n--- Gradient Boosting Results ---")
+print("R² (Gradient Boosting):", r2_score(y_test, y_pred_gb))
+print("RMSE (Gradient Boosting):", root_mean_squared_error(y_test, y_pred_gb))
+
+# Feature Importance
+gb_importance = pd.DataFrame({
+    "Feature": features,
+    "Importance": gb_model.feature_importances_
+})
+
+print("\nGradient Boosting Feature Importance:")
+print(gb_importance.sort_values(by="Importance", ascending=False))

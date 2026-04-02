@@ -10,6 +10,7 @@ from sklearn.metrics import r2_score, root_mean_squared_error
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import Ridge
 from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.model_selection import KFold, cross_val_score
 
 # Load dataset
 df = pd.read_csv("dataset.csv")
@@ -92,6 +93,29 @@ print("\nRidge Coefficients (Standardized):")
 print(ridge_coefficients.sort_values(by="Coefficient", ascending=False))
 
 print(X.corr())
+
+### Cross-Validation ###
+
+from sklearn.model_selection import KFold, cross_val_score
+
+# Use full dataset for cross-validation
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+ridge_cv = Ridge(alpha=1.0)
+
+cv = KFold(n_splits=5, shuffle=True, random_state=42)
+
+cv_scores = cross_val_score(
+    ridge_cv,
+    X_scaled,
+    y,
+    cv=cv,
+    scoring="r2"
+)
+
+print("\nCross-Validated R² Scores:", cv_scores)
+print("Mean Cross-Validated R²:", cv_scores.mean())
 
 ##### GRADIENT BOOSTING MODEL #####
 

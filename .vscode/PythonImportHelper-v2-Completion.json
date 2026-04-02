@@ -35,6 +35,38 @@
         "documentation": {}
     },
     {
+        "label": "KFold",
+        "importPath": "sklearn.model_selection",
+        "description": "sklearn.model_selection",
+        "isExtraImport": true,
+        "detail": "sklearn.model_selection",
+        "documentation": {}
+    },
+    {
+        "label": "cross_val_score",
+        "importPath": "sklearn.model_selection",
+        "description": "sklearn.model_selection",
+        "isExtraImport": true,
+        "detail": "sklearn.model_selection",
+        "documentation": {}
+    },
+    {
+        "label": "KFold",
+        "importPath": "sklearn.model_selection",
+        "description": "sklearn.model_selection",
+        "isExtraImport": true,
+        "detail": "sklearn.model_selection",
+        "documentation": {}
+    },
+    {
+        "label": "cross_val_score",
+        "importPath": "sklearn.model_selection",
+        "description": "sklearn.model_selection",
+        "isExtraImport": true,
+        "detail": "sklearn.model_selection",
+        "documentation": {}
+    },
+    {
         "label": "r2_score",
         "importPath": "sklearn.metrics",
         "description": "sklearn.metrics",
@@ -169,7 +201,52 @@
         "kind": 5,
         "importPath": "early-v1",
         "description": "early-v1",
-        "peekOfCode": "ridge_coefficients = pd.DataFrame({\n    \"Feature\": features,\n    \"Coefficient\": ridge_model.coef_\n})\nprint(\"\\nRidge Coefficients (Standardized):\")\nprint(ridge_coefficients.sort_values(by=\"Coefficient\", ascending=False))\nprint(X.corr())\n##### GRADIENT BOOSTING MODEL #####\n# IMPORTANT: Do NOT scale features for tree-based models\nX_train_gb = X_train",
+        "peekOfCode": "ridge_coefficients = pd.DataFrame({\n    \"Feature\": features,\n    \"Coefficient\": ridge_model.coef_\n})\nprint(\"\\nRidge Coefficients (Standardized):\")\nprint(ridge_coefficients.sort_values(by=\"Coefficient\", ascending=False))\nprint(X.corr())\n### Cross-Validation ###\nfrom sklearn.model_selection import KFold, cross_val_score\n# Use full dataset for cross-validation",
+        "detail": "early-v1",
+        "documentation": {}
+    },
+    {
+        "label": "scaler",
+        "kind": 5,
+        "importPath": "early-v1",
+        "description": "early-v1",
+        "peekOfCode": "scaler = StandardScaler()\nX_scaled = scaler.fit_transform(X)\nridge_cv = Ridge(alpha=1.0)\ncv = KFold(n_splits=5, shuffle=True, random_state=42)\ncv_scores = cross_val_score(\n    ridge_cv,\n    X_scaled,\n    y,\n    cv=cv,\n    scoring=\"r2\"",
+        "detail": "early-v1",
+        "documentation": {}
+    },
+    {
+        "label": "X_scaled",
+        "kind": 5,
+        "importPath": "early-v1",
+        "description": "early-v1",
+        "peekOfCode": "X_scaled = scaler.fit_transform(X)\nridge_cv = Ridge(alpha=1.0)\ncv = KFold(n_splits=5, shuffle=True, random_state=42)\ncv_scores = cross_val_score(\n    ridge_cv,\n    X_scaled,\n    y,\n    cv=cv,\n    scoring=\"r2\"\n)",
+        "detail": "early-v1",
+        "documentation": {}
+    },
+    {
+        "label": "ridge_cv",
+        "kind": 5,
+        "importPath": "early-v1",
+        "description": "early-v1",
+        "peekOfCode": "ridge_cv = Ridge(alpha=1.0)\ncv = KFold(n_splits=5, shuffle=True, random_state=42)\ncv_scores = cross_val_score(\n    ridge_cv,\n    X_scaled,\n    y,\n    cv=cv,\n    scoring=\"r2\"\n)\nprint(\"\\nCross-Validated R² Scores:\", cv_scores)",
+        "detail": "early-v1",
+        "documentation": {}
+    },
+    {
+        "label": "cv",
+        "kind": 5,
+        "importPath": "early-v1",
+        "description": "early-v1",
+        "peekOfCode": "cv = KFold(n_splits=5, shuffle=True, random_state=42)\ncv_scores = cross_val_score(\n    ridge_cv,\n    X_scaled,\n    y,\n    cv=cv,\n    scoring=\"r2\"\n)\nprint(\"\\nCross-Validated R² Scores:\", cv_scores)\nprint(\"Mean Cross-Validated R²:\", cv_scores.mean())",
+        "detail": "early-v1",
+        "documentation": {}
+    },
+    {
+        "label": "cv_scores",
+        "kind": 5,
+        "importPath": "early-v1",
+        "description": "early-v1",
+        "peekOfCode": "cv_scores = cross_val_score(\n    ridge_cv,\n    X_scaled,\n    y,\n    cv=cv,\n    scoring=\"r2\"\n)\nprint(\"\\nCross-Validated R² Scores:\", cv_scores)\nprint(\"Mean Cross-Validated R²:\", cv_scores.mean())\n##### GRADIENT BOOSTING MODEL #####",
         "detail": "early-v1",
         "documentation": {}
     },

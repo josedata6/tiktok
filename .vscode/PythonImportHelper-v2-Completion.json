@@ -67,6 +67,46 @@
         "documentation": {}
     },
     {
+        "label": "train_test_split",
+        "importPath": "sklearn.model_selection",
+        "description": "sklearn.model_selection",
+        "isExtraImport": true,
+        "detail": "sklearn.model_selection",
+        "documentation": {}
+    },
+    {
+        "label": "KFold",
+        "importPath": "sklearn.model_selection",
+        "description": "sklearn.model_selection",
+        "isExtraImport": true,
+        "detail": "sklearn.model_selection",
+        "documentation": {}
+    },
+    {
+        "label": "cross_val_score",
+        "importPath": "sklearn.model_selection",
+        "description": "sklearn.model_selection",
+        "isExtraImport": true,
+        "detail": "sklearn.model_selection",
+        "documentation": {}
+    },
+    {
+        "label": "r2_score",
+        "importPath": "sklearn.metrics",
+        "description": "sklearn.metrics",
+        "isExtraImport": true,
+        "detail": "sklearn.metrics",
+        "documentation": {}
+    },
+    {
+        "label": "root_mean_squared_error",
+        "importPath": "sklearn.metrics",
+        "description": "sklearn.metrics",
+        "isExtraImport": true,
+        "detail": "sklearn.metrics",
+        "documentation": {}
+    },
+    {
         "label": "r2_score",
         "importPath": "sklearn.metrics",
         "description": "sklearn.metrics",
@@ -91,7 +131,23 @@
         "documentation": {}
     },
     {
+        "label": "StandardScaler",
+        "importPath": "sklearn.preprocessing",
+        "description": "sklearn.preprocessing",
+        "isExtraImport": true,
+        "detail": "sklearn.preprocessing",
+        "documentation": {}
+    },
+    {
         "label": "Ridge",
+        "importPath": "sklearn.linear_model",
+        "description": "sklearn.linear_model",
+        "isExtraImport": true,
+        "detail": "sklearn.linear_model",
+        "documentation": {}
+    },
+    {
+        "label": "RidgeCV",
         "importPath": "sklearn.linear_model",
         "description": "sklearn.linear_model",
         "isExtraImport": true,
@@ -104,6 +160,31 @@
         "description": "sklearn.ensemble",
         "isExtraImport": true,
         "detail": "sklearn.ensemble",
+        "documentation": {}
+    },
+    {
+        "label": "GradientBoostingRegressor",
+        "importPath": "sklearn.ensemble",
+        "description": "sklearn.ensemble",
+        "isExtraImport": true,
+        "detail": "sklearn.ensemble",
+        "documentation": {}
+    },
+    {
+        "label": "sklearn",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sklearn",
+        "description": "sklearn",
+        "detail": "sklearn",
+        "documentation": {}
+    },
+    {
+        "label": "variance_inflation_factor",
+        "importPath": "statsmodels.stats.outliers_influence",
+        "description": "statsmodels.stats.outliers_influence",
+        "isExtraImport": true,
+        "detail": "statsmodels.stats.outliers_influence",
         "documentation": {}
     },
     {
@@ -293,6 +374,240 @@
         "description": "early-v1",
         "peekOfCode": "gb_importance = pd.DataFrame({\n    \"Feature\": features,\n    \"Importance\": gb_model.feature_importances_\n})\nprint(\"\\nGradient Boosting Feature Importance:\")\nprint(gb_importance.sort_values(by=\"Importance\", ascending=False))",
         "detail": "early-v1",
+        "documentation": {}
+    },
+    {
+        "label": "SEED",
+        "kind": 5,
+        "importPath": "early-v2",
+        "description": "early-v2",
+        "peekOfCode": "SEED = 42\nprint(f\"scikit-learn version : {sklearn.__version__}\")\nprint(f\"pandas version       : {pd.__version__}\")\nprint(f\"numpy version        : {np.__version__}\")\n# ── Load dataset ─────────────────────────────────────────────────────────────\ndf = pd.read_csv(\"dataset.csv\")\n# ── Target variable inspection ───────────────────────────────────────────────\n# Algorithmic amplification indices are typically right-skewed.\n# Log-transforming a skewed target often improves linear model performance.\ntarget_raw = df[\"algorithmic_amplification_index\"]",
+        "detail": "early-v2",
+        "documentation": {}
+    },
+    {
+        "label": "df",
+        "kind": 5,
+        "importPath": "early-v2",
+        "description": "early-v2",
+        "peekOfCode": "df = pd.read_csv(\"dataset.csv\")\n# ── Target variable inspection ───────────────────────────────────────────────\n# Algorithmic amplification indices are typically right-skewed.\n# Log-transforming a skewed target often improves linear model performance.\ntarget_raw = df[\"algorithmic_amplification_index\"]\nprint(\"\\nTarget variable summary:\")\nprint(target_raw.describe())\nprint(f\"Skewness: {target_raw.skew():.3f}\")\n# Apply log1p transform if skewness > 1 (common threshold)\nUSE_LOG_TARGET = target_raw.skew() > 1.0",
+        "detail": "early-v2",
+        "documentation": {}
+    },
+    {
+        "label": "target_raw",
+        "kind": 5,
+        "importPath": "early-v2",
+        "description": "early-v2",
+        "peekOfCode": "target_raw = df[\"algorithmic_amplification_index\"]\nprint(\"\\nTarget variable summary:\")\nprint(target_raw.describe())\nprint(f\"Skewness: {target_raw.skew():.3f}\")\n# Apply log1p transform if skewness > 1 (common threshold)\nUSE_LOG_TARGET = target_raw.skew() > 1.0\nif USE_LOG_TARGET:\n    print(\">> Skewness > 1 detected. Applying log1p transform to target.\")\n    y = np.log1p(target_raw)\nelse:",
+        "detail": "early-v2",
+        "documentation": {}
+    },
+    {
+        "label": "USE_LOG_TARGET",
+        "kind": 5,
+        "importPath": "early-v2",
+        "description": "early-v2",
+        "peekOfCode": "USE_LOG_TARGET = target_raw.skew() > 1.0\nif USE_LOG_TARGET:\n    print(\">> Skewness > 1 detected. Applying log1p transform to target.\")\n    y = np.log1p(target_raw)\nelse:\n    print(\">> Target is approximately symmetric. Using raw values.\")\n    y = target_raw\n# ── Correlation check (early signal features vs. target) ─────────────────────\n# NOTE: early_total_engagement is excluded from modeling because it is a\n# linear combination of early_likes + early_comments + early_shares.",
+        "detail": "early-v2",
+        "documentation": {}
+    },
+    {
+        "label": "early_features",
+        "kind": 5,
+        "importPath": "early-v2",
+        "description": "early-v2",
+        "peekOfCode": "early_features = [\n    \"early_likes\",\n    \"early_comments\",\n    \"early_shares\",\n    \"early_total_engagement\",     # inspected here only — NOT used in model\n    \"early_engagement_velocity\",\n    \"early_comment_share_ratio\"\n]\nprint(\"\\nPearson correlations with target (raw):\")\nprint(df[early_features].corrwith(target_raw).sort_values(ascending=False))",
+        "detail": "early-v2",
+        "documentation": {}
+    },
+    {
+        "label": "USE_VELOCITY_MODEL",
+        "kind": 5,
+        "importPath": "early-v2",
+        "description": "early-v2",
+        "peekOfCode": "USE_VELOCITY_MODEL = False\nif USE_VELOCITY_MODEL:\n    features = [\n        \"early_engagement_velocity\",\n        \"follower_count\",\n        \"authority_log\",\n        \"verified\",\n        \"account_age_years\"\n    ]\n    print(\"\\n>> Using VELOCITY feature set.\")",
+        "detail": "early-v2",
+        "documentation": {}
+    },
+    {
+        "label": "X",
+        "kind": 5,
+        "importPath": "early-v2",
+        "description": "early-v2",
+        "peekOfCode": "X = df[features]\n# ── Multicollinearity check (VIF) ─────────────────────────────────────────────\n# VIF > 10 is a common threshold indicating problematic multicollinearity.\nvif_data = pd.DataFrame({\n    \"Feature\": features,\n    \"VIF\": [\n        variance_inflation_factor(X.values, i)\n        for i in range(X.shape[1])\n    ]\n})",
+        "detail": "early-v2",
+        "documentation": {}
+    },
+    {
+        "label": "vif_data",
+        "kind": 5,
+        "importPath": "early-v2",
+        "description": "early-v2",
+        "peekOfCode": "vif_data = pd.DataFrame({\n    \"Feature\": features,\n    \"VIF\": [\n        variance_inflation_factor(X.values, i)\n        for i in range(X.shape[1])\n    ]\n})\nprint(\"\\nVariance Inflation Factors (VIF):\")\nprint(vif_data.sort_values(\"VIF\", ascending=False))\nhigh_vif = vif_data[vif_data[\"VIF\"] > 10]",
+        "detail": "early-v2",
+        "documentation": {}
+    },
+    {
+        "label": "high_vif",
+        "kind": 5,
+        "importPath": "early-v2",
+        "description": "early-v2",
+        "peekOfCode": "high_vif = vif_data[vif_data[\"VIF\"] > 10]\nif not high_vif.empty:\n    print(\">> WARNING: High VIF detected for:\", high_vif[\"Feature\"].tolist())\n    print(\"   Consider removing or combining correlated features.\")\n# ── Train / test split ────────────────────────────────────────────────────────\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.2, random_state=SEED\n)\n# ── Ridge Regression (auto-tuned alpha via RidgeCV) ──────────────────────────\n# RidgeCV performs internal LOO or K-Fold CV to select the best alpha.",
+        "detail": "early-v2",
+        "documentation": {}
+    },
+    {
+        "label": "scaler",
+        "kind": 5,
+        "importPath": "early-v2",
+        "description": "early-v2",
+        "peekOfCode": "scaler = StandardScaler()\nX_train_scaled = scaler.fit_transform(X_train)\nX_test_scaled  = scaler.transform(X_test)\nalphas = np.logspace(-3, 3, 100)    # search space: 0.001 → 1000\nridge_model = RidgeCV(alphas=alphas, cv=5)\nridge_model.fit(X_train_scaled, y_train)\ny_pred_ridge = ridge_model.predict(X_test_scaled)\nprint(f\"\\n── Ridge Regression Results ──────────────────────────\")\nprint(f\"Best alpha (auto-selected): {ridge_model.alpha_:.4f}\")\nprint(f\"R²   (Ridge): {r2_score(y_test, y_pred_ridge):.4f}\")",
+        "detail": "early-v2",
+        "documentation": {}
+    },
+    {
+        "label": "X_train_scaled",
+        "kind": 5,
+        "importPath": "early-v2",
+        "description": "early-v2",
+        "peekOfCode": "X_train_scaled = scaler.fit_transform(X_train)\nX_test_scaled  = scaler.transform(X_test)\nalphas = np.logspace(-3, 3, 100)    # search space: 0.001 → 1000\nridge_model = RidgeCV(alphas=alphas, cv=5)\nridge_model.fit(X_train_scaled, y_train)\ny_pred_ridge = ridge_model.predict(X_test_scaled)\nprint(f\"\\n── Ridge Regression Results ──────────────────────────\")\nprint(f\"Best alpha (auto-selected): {ridge_model.alpha_:.4f}\")\nprint(f\"R²   (Ridge): {r2_score(y_test, y_pred_ridge):.4f}\")\nprint(f\"RMSE (Ridge): {root_mean_squared_error(y_test, y_pred_ridge):.4f}\")",
+        "detail": "early-v2",
+        "documentation": {}
+    },
+    {
+        "label": "alphas",
+        "kind": 5,
+        "importPath": "early-v2",
+        "description": "early-v2",
+        "peekOfCode": "alphas = np.logspace(-3, 3, 100)    # search space: 0.001 → 1000\nridge_model = RidgeCV(alphas=alphas, cv=5)\nridge_model.fit(X_train_scaled, y_train)\ny_pred_ridge = ridge_model.predict(X_test_scaled)\nprint(f\"\\n── Ridge Regression Results ──────────────────────────\")\nprint(f\"Best alpha (auto-selected): {ridge_model.alpha_:.4f}\")\nprint(f\"R²   (Ridge): {r2_score(y_test, y_pred_ridge):.4f}\")\nprint(f\"RMSE (Ridge): {root_mean_squared_error(y_test, y_pred_ridge):.4f}\")\nridge_coef_df = pd.DataFrame({\n    \"Feature\": features,",
+        "detail": "early-v2",
+        "documentation": {}
+    },
+    {
+        "label": "ridge_model",
+        "kind": 5,
+        "importPath": "early-v2",
+        "description": "early-v2",
+        "peekOfCode": "ridge_model = RidgeCV(alphas=alphas, cv=5)\nridge_model.fit(X_train_scaled, y_train)\ny_pred_ridge = ridge_model.predict(X_test_scaled)\nprint(f\"\\n── Ridge Regression Results ──────────────────────────\")\nprint(f\"Best alpha (auto-selected): {ridge_model.alpha_:.4f}\")\nprint(f\"R²   (Ridge): {r2_score(y_test, y_pred_ridge):.4f}\")\nprint(f\"RMSE (Ridge): {root_mean_squared_error(y_test, y_pred_ridge):.4f}\")\nridge_coef_df = pd.DataFrame({\n    \"Feature\": features,\n    \"Coefficient\": ridge_model.coef_",
+        "detail": "early-v2",
+        "documentation": {}
+    },
+    {
+        "label": "y_pred_ridge",
+        "kind": 5,
+        "importPath": "early-v2",
+        "description": "early-v2",
+        "peekOfCode": "y_pred_ridge = ridge_model.predict(X_test_scaled)\nprint(f\"\\n── Ridge Regression Results ──────────────────────────\")\nprint(f\"Best alpha (auto-selected): {ridge_model.alpha_:.4f}\")\nprint(f\"R²   (Ridge): {r2_score(y_test, y_pred_ridge):.4f}\")\nprint(f\"RMSE (Ridge): {root_mean_squared_error(y_test, y_pred_ridge):.4f}\")\nridge_coef_df = pd.DataFrame({\n    \"Feature\": features,\n    \"Coefficient\": ridge_model.coef_\n}).sort_values(\"Coefficient\", ascending=False)\nprint(\"\\nRidge Coefficients (standardized):\")",
+        "detail": "early-v2",
+        "documentation": {}
+    },
+    {
+        "label": "ridge_coef_df",
+        "kind": 5,
+        "importPath": "early-v2",
+        "description": "early-v2",
+        "peekOfCode": "ridge_coef_df = pd.DataFrame({\n    \"Feature\": features,\n    \"Coefficient\": ridge_model.coef_\n}).sort_values(\"Coefficient\", ascending=False)\nprint(\"\\nRidge Coefficients (standardized):\")\nprint(ridge_coef_df.to_string(index=False))\n# ── Ridge Cross-Validation (full dataset) ────────────────────────────────────\nX_scaled_full = scaler.fit_transform(X)\nridge_cv_model = RidgeCV(alphas=alphas, cv=5)\nkf = KFold(n_splits=5, shuffle=True, random_state=SEED)",
+        "detail": "early-v2",
+        "documentation": {}
+    },
+    {
+        "label": "X_scaled_full",
+        "kind": 5,
+        "importPath": "early-v2",
+        "description": "early-v2",
+        "peekOfCode": "X_scaled_full = scaler.fit_transform(X)\nridge_cv_model = RidgeCV(alphas=alphas, cv=5)\nkf = KFold(n_splits=5, shuffle=True, random_state=SEED)\ncv_scores_ridge = cross_val_score(\n    ridge_cv_model, X_scaled_full, y, cv=kf, scoring=\"r2\"\n)\nprint(f\"\\nRidge CV R² scores : {np.round(cv_scores_ridge, 4)}\")\nprint(f\"Mean CV R²         : {cv_scores_ridge.mean():.4f} \"\n      f\"(±{cv_scores_ridge.std():.4f})\")\n# ── Gradient Boosting ─────────────────────────────────────────────────────────",
+        "detail": "early-v2",
+        "documentation": {}
+    },
+    {
+        "label": "ridge_cv_model",
+        "kind": 5,
+        "importPath": "early-v2",
+        "description": "early-v2",
+        "peekOfCode": "ridge_cv_model = RidgeCV(alphas=alphas, cv=5)\nkf = KFold(n_splits=5, shuffle=True, random_state=SEED)\ncv_scores_ridge = cross_val_score(\n    ridge_cv_model, X_scaled_full, y, cv=kf, scoring=\"r2\"\n)\nprint(f\"\\nRidge CV R² scores : {np.round(cv_scores_ridge, 4)}\")\nprint(f\"Mean CV R²         : {cv_scores_ridge.mean():.4f} \"\n      f\"(±{cv_scores_ridge.std():.4f})\")\n# ── Gradient Boosting ─────────────────────────────────────────────────────────\n# Tree-based models do NOT require feature scaling.",
+        "detail": "early-v2",
+        "documentation": {}
+    },
+    {
+        "label": "kf",
+        "kind": 5,
+        "importPath": "early-v2",
+        "description": "early-v2",
+        "peekOfCode": "kf = KFold(n_splits=5, shuffle=True, random_state=SEED)\ncv_scores_ridge = cross_val_score(\n    ridge_cv_model, X_scaled_full, y, cv=kf, scoring=\"r2\"\n)\nprint(f\"\\nRidge CV R² scores : {np.round(cv_scores_ridge, 4)}\")\nprint(f\"Mean CV R²         : {cv_scores_ridge.mean():.4f} \"\n      f\"(±{cv_scores_ridge.std():.4f})\")\n# ── Gradient Boosting ─────────────────────────────────────────────────────────\n# Tree-based models do NOT require feature scaling.\ngb_model = GradientBoostingRegressor(",
+        "detail": "early-v2",
+        "documentation": {}
+    },
+    {
+        "label": "cv_scores_ridge",
+        "kind": 5,
+        "importPath": "early-v2",
+        "description": "early-v2",
+        "peekOfCode": "cv_scores_ridge = cross_val_score(\n    ridge_cv_model, X_scaled_full, y, cv=kf, scoring=\"r2\"\n)\nprint(f\"\\nRidge CV R² scores : {np.round(cv_scores_ridge, 4)}\")\nprint(f\"Mean CV R²         : {cv_scores_ridge.mean():.4f} \"\n      f\"(±{cv_scores_ridge.std():.4f})\")\n# ── Gradient Boosting ─────────────────────────────────────────────────────────\n# Tree-based models do NOT require feature scaling.\ngb_model = GradientBoostingRegressor(\n    n_estimators=200,",
+        "detail": "early-v2",
+        "documentation": {}
+    },
+    {
+        "label": "gb_model",
+        "kind": 5,
+        "importPath": "early-v2",
+        "description": "early-v2",
+        "peekOfCode": "gb_model = GradientBoostingRegressor(\n    n_estimators=200,\n    learning_rate=0.05,\n    max_depth=3,\n    random_state=SEED\n)\ngb_model.fit(X_train, y_train)\ny_pred_gb = gb_model.predict(X_test)\nprint(f\"\\n── Gradient Boosting Results ─────────────────────────\")\nprint(f\"R²   (Gradient Boosting): {r2_score(y_test, y_pred_gb):.4f}\")",
+        "detail": "early-v2",
+        "documentation": {}
+    },
+    {
+        "label": "y_pred_gb",
+        "kind": 5,
+        "importPath": "early-v2",
+        "description": "early-v2",
+        "peekOfCode": "y_pred_gb = gb_model.predict(X_test)\nprint(f\"\\n── Gradient Boosting Results ─────────────────────────\")\nprint(f\"R²   (Gradient Boosting): {r2_score(y_test, y_pred_gb):.4f}\")\nprint(f\"RMSE (Gradient Boosting): {root_mean_squared_error(y_test, y_pred_gb):.4f}\")\ngb_importance_df = pd.DataFrame({\n    \"Feature\": features,\n    \"Importance\": gb_model.feature_importances_\n}).sort_values(\"Importance\", ascending=False)\nprint(\"\\nGradient Boosting Feature Importances:\")\nprint(gb_importance_df.to_string(index=False))",
+        "detail": "early-v2",
+        "documentation": {}
+    },
+    {
+        "label": "gb_importance_df",
+        "kind": 5,
+        "importPath": "early-v2",
+        "description": "early-v2",
+        "peekOfCode": "gb_importance_df = pd.DataFrame({\n    \"Feature\": features,\n    \"Importance\": gb_model.feature_importances_\n}).sort_values(\"Importance\", ascending=False)\nprint(\"\\nGradient Boosting Feature Importances:\")\nprint(gb_importance_df.to_string(index=False))\nresiduals = y_test - y_pred_gb\nplt.scatter(y_pred_gb, residuals, alpha=0.3, s=10)\nplt.axhline(0, color='red', linewidth=1)\nplt.xlabel(\"Predicted values\")",
+        "detail": "early-v2",
+        "documentation": {}
+    },
+    {
+        "label": "residuals",
+        "kind": 5,
+        "importPath": "early-v2",
+        "description": "early-v2",
+        "peekOfCode": "residuals = y_test - y_pred_gb\nplt.scatter(y_pred_gb, residuals, alpha=0.3, s=10)\nplt.axhline(0, color='red', linewidth=1)\nplt.xlabel(\"Predicted values\")\nplt.ylabel(\"Residuals\")\nplt.title(\"Residual plot — Gradient Boosting\")\nplt.savefig(\"residuals.png\", dpi=150)\n# ── Gradient Boosting Cross-Validation ───────────────────────────────────────\n# Previously missing — single-split GB results are sensitive to the random seed.\ncv_scores_gb = cross_val_score(",
+        "detail": "early-v2",
+        "documentation": {}
+    },
+    {
+        "label": "cv_scores_gb",
+        "kind": 5,
+        "importPath": "early-v2",
+        "description": "early-v2",
+        "peekOfCode": "cv_scores_gb = cross_val_score(\n    GradientBoostingRegressor(\n        n_estimators=200, learning_rate=0.05,\n        max_depth=3, random_state=SEED\n    ),\n    X, y, cv=kf, scoring=\"r2\"\n)\nprint(f\"\\nGradient Boosting CV R² scores : {np.round(cv_scores_gb, 4)}\")\nprint(f\"Mean CV R²                     : {cv_scores_gb.mean():.4f} \"\n      f\"(±{cv_scores_gb.std():.4f})\")",
+        "detail": "early-v2",
+        "documentation": {}
+    },
+    {
+        "label": "summary",
+        "kind": 5,
+        "importPath": "early-v2",
+        "description": "early-v2",
+        "peekOfCode": "summary = pd.DataFrame({\n    \"Model\": [\"Ridge (held-out)\", \"Ridge (5-fold CV)\", \"Gradient Boosting (held-out)\", \"Gradient Boosting (5-fold CV)\"],\n    \"R²\":    [\n        r2_score(y_test, y_pred_ridge),\n        cv_scores_ridge.mean(),\n        r2_score(y_test, y_pred_gb),\n        cv_scores_gb.mean()\n    ],\n    \"RMSE\": [\n        root_mean_squared_error(y_test, y_pred_ridge),",
+        "detail": "early-v2",
+        "documentation": {}
+    },
+    {
+        "label": "colors_ridge",
+        "kind": 5,
+        "importPath": "early-v2",
+        "description": "early-v2",
+        "peekOfCode": "colors_ridge = [\"steelblue\" if c >= 0 else \"tomato\" for c in ridge_coef_df[\"Coefficient\"]]\naxes[0].barh(ridge_coef_df[\"Feature\"], ridge_coef_df[\"Coefficient\"], color=colors_ridge)\naxes[0].axvline(0, color=\"black\", linewidth=0.8)\naxes[0].set_title(\"Ridge Coefficients (Standardized)\")\naxes[0].set_xlabel(\"Coefficient Value\")\naxes[0].invert_yaxis()\n# Gradient Boosting importances\naxes[1].barh(gb_importance_df[\"Feature\"], gb_importance_df[\"Importance\"], color=\"steelblue\")\naxes[1].set_title(\"Gradient Boosting Feature Importances\")\naxes[1].set_xlabel(\"Importance Score\")",
+        "detail": "early-v2",
         "documentation": {}
     },
     {
